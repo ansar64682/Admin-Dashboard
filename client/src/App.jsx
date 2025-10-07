@@ -1,4 +1,20 @@
 import "./App.css";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { useSelector } from "react-redux";
+import { themeController } from "./theme";
+import { useMemo } from "react";
 
-function App() {}
+function App() {
+  const mode = useSelector((state) => state.global.mode);
+  const theme = useMemo(() => createTheme(themeController(mode)), [mode]);
+
+  return (
+    <div className="app">
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+      </ThemeProvider>
+    </div>
+  );
+}
 export default App;
