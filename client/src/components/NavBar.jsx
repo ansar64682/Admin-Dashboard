@@ -8,7 +8,7 @@ import {
   SettingsOutlined,
   ArrowDropDownOutlined,
 } from "@mui/icons-material";
-import FlexBetween from "../../components/FlexBetween";
+import FlexBetween from "./FlexBetween";
 import { useDispatch } from "react-redux";
 import {
   useTheme,
@@ -17,7 +17,7 @@ import {
   IconButton,
   InputBase,
 } from "@mui/material";
-import { setMode } from "../../states/theme.state";
+import { setMode } from "../states/theme.state.js";
 
 const NavBar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
@@ -35,7 +35,6 @@ const NavBar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <IconButton
             onClick={() => {
               setIsSidebarOpen(!isSidebarOpen);
-              console.log("NavBar Val", isSidebarOpen);
             }}
           >
             <MenuIcon />

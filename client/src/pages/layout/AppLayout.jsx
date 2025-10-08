@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Box, useMediaQuery } from "@mui/material";
 
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
-import NavBar from "../navbar/NavBar";
+
+import NavBar from "../../components/NavBar";
 import Sidebar from "../../components/Sidebar";
 
 const AppLayout = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
-  console.log("before layout", isSidebarOpen);
-  useEffect(() => {
-    console.log("after layout...", isSidebarOpen);
-  }, [isSidebarOpen]);
 
   return (
     <Box

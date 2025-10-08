@@ -154,7 +154,9 @@ const Sidebar = ({
                   return (
                     <Typography
                       key={{ name }}
-                      sx={{ m: "2.25rem 0 1rem 2rem" }}
+                      sx={{
+                        m: "2.25rem 0 1rem 2rem",
+                      }}
                     >
                       {name}
                     </Typography>

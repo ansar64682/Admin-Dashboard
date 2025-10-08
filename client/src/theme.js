@@ -1,20 +1,22 @@
-// Color scheme - Glossy dim dark with blue tint
+// Color scheme - Fixed with green secondary
 export const colorsDark = {
   grey: {
-    0: "#ffffff", // Pure white
-    50: "#f8fafc", // Glossy light
-    100: "#f1f5f9", // Extra light
-    200: "#e2e8f0", // Very light
-    300: "#cbd5e1", // Light
-    400: "#94a3b8", // Medium light
-    500: "#64748b", // Medium
-    600: "#475569", // Medium dark
-    700: "#334155", // Dark
-    800: "#1e293b", // Very dark
-    900: "#0f172a", // Extra dark
-    1000: "#020617", // Pitch black
+    0: "#ffffff", // manually adjusted
+    10: "#f6f6f6", // manually adjusted
+    50: "#f0f0f0", // manually adjusted
+    100: "#e0e0e0",
+    200: "#c2c2c2",
+    300: "#a3a3a3",
+    400: "#858585",
+    500: "#666666",
+    600: "#525252",
+    700: "#3d3d3d",
+    800: "#292929",
+    900: "#141414",
+    1000: "#000000", // manually adjusted
   },
   primary: {
+    // blue
     100: "#d3d4de",
     200: "#a6a9be",
     300: "#7a7f9d",
@@ -26,13 +28,14 @@ export const colorsDark = {
     900: "#070812",
   },
   secondary: {
+    // yellow
     50: "#f0f0f0", // manually adjusted
     100: "#fff6e0",
     200: "#ffedc2",
     300: "#ffe3a3",
     400: "#ffda85",
     500: "#ffd166",
-    600: "#cca752",
+    600: "#937a0eff",
     700: "#997d3d",
     800: "#665429",
     900: "#332a14",
@@ -59,62 +62,54 @@ const reverseColors = (colorsDark) => {
 
 export const colorsLight = reverseColors(colorsDark);
 
-// Theme controller - GLOSSY DIM DARK + NORMAL LIGHT
+// Theme controller - FIXED with zoom reduction
 export const themeController = (mode) => {
   return {
     palette: {
       mode: mode,
       ...(mode === "dark"
         ? {
-            // DARK MODE - Glossy dim dark with blue tint
+            // DARK MODE - Glossy dim dark
             primary: {
               ...colorsDark.primary,
               main: colorsDark.primary[400], // #0ea5e9 - Bright blue
-              light: colorsDark.primary[300], // #38bdf8 - Lighter blue
-              dark: colorsDark.primary[500], // #0284c7 - Darker blue
+              light: colorsDark.primary[400], // #38bdf8 - Lighter blue
             },
             secondary: {
               ...colorsDark.secondary,
-              main: colorsDark.secondary[400], // #60a5fa - Electric blue
-              light: colorsDark.secondary[300], // #93c5fd - Lighter electric
-              dark: colorsDark.secondary[500], // #3b82f6 - Darker electric
+              main: colorsDark.secondary[300], // #4ade80 - Vibrant green
             },
             neutral: {
               ...colorsDark.grey,
-              main: colorsDark.grey[400], // #94a3b8 - Medium light grey
+              main: colorsDark.grey[500], // #94a3b8 - Medium light grey
             },
             background: {
-              default: colorsDark.grey[800], // #1e293b - Glossy dim dark (NOT pitch black)
-              alt: colorsDark.primary[600], // #334155 - Slightly lighter for cards
-              paper: colorsDark.grey[700], // #334155 - Card surfaces
+              default: colorsDark.primary[600], // #1e293b - Glossy dim dark
+              alt: colorsDark.primary[500], // #334155 - Cards
             },
             text: {
-              primary: colorsDark.grey[100], // #f1f5f9 - Light text
-              secondary: colorsDark.grey[200], // #e2e8f0 - Medium light text
+              primary: colorsDark.grey[600], // #f1f5f9 - Light text
+              secondary: colorsDark.grey[500], // #e2e8f0 - Medium light text
             },
           }
         : {
-            // LIGHT MODE - Normal clean light
+            // LIGHT MODE - Clean light
             primary: {
               ...colorsLight.primary,
-              main: colorsDark.primary[500], // #0284c7 - Main blue
-              light: colorsDark.primary[400], // #0ea5e9 - Lighter blue
-              dark: colorsDark.primary[600], // #0369a1 - Darker blue
+              main: colorsDark.primary[100], // #0284c7 - Main blue
+              light: colorsDark.primary[200], // #0ea5e9 - Lighter blue
             },
             secondary: {
               ...colorsLight.secondary,
-              main: colorsDark.secondary[500], // #3b82f6 - Electric blue
-              light: colorsDark.secondary[400], // #60a5fa - Lighter electric
-              dark: colorsDark.secondary[600], // #2563eb - Darker electric
+              main: colorsDark.secondary[600], // #22c55e - Main green
             },
             neutral: {
               ...colorsLight.grey,
-              main: colorsDark.grey[500], // #64748b - Medium grey
+              main: colorsDark.grey[700], // #64748b - Medium grey
             },
             background: {
               default: colorsDark.grey[0], // #ffffff - Pure white
               alt: colorsDark.grey[50], // #f8fafc - Very light grey
-              paper: colorsDark.grey[100], // #f1f5f9 - Card background
             },
             text: {
               primary: colorsDark.grey[900], // #0f172a - Dark text
@@ -124,30 +119,76 @@ export const themeController = (mode) => {
     },
     typography: {
       fontFamily: ["Inter", "sans-serif"].join(","),
-      fontSize: 12,
+      fontSize: 12, // REDUCED from 14px (makes everything smaller)
       h1: {
         fontFamily: ["Inter", "sans-serif"].join(","),
-        fontSize: 40,
+        fontSize: 32, // REDUCED from 40px
+        fontWeight: 700,
       },
       h2: {
         fontFamily: ["Inter", "sans-serif"].join(","),
-        fontSize: 32,
+        fontSize: 26, // REDUCED from 32px
+        fontWeight: 600,
       },
       h3: {
         fontFamily: ["Inter", "sans-serif"].join(","),
-        fontSize: 24,
+        fontSize: 20, // REDUCED from 24px
+        fontWeight: 600,
       },
       h4: {
         fontFamily: ["Inter", "sans-serif"].join(","),
-        fontSize: 20,
+        fontSize: 16, // REDUCED from 20px
+        fontWeight: 500,
       },
       h5: {
         fontFamily: ["Inter", "sans-serif"].join(","),
-        fontSize: 16,
+        fontSize: 14, // REDUCED from 16px
+        fontWeight: 500,
       },
       h6: {
         fontFamily: ["Inter", "sans-serif"].join(","),
-        fontSize: 14,
+        fontSize: 12, // REDUCED from 14px
+        fontWeight: 500,
+      },
+    },
+    // REDUCED spacing scale (makes components more compact)
+    spacing: 6, // REDUCED from default 8px
+
+    shape: {
+      borderRadius: 6, // Slightly smaller borders
+    },
+    shadows: [
+      "none",
+      "0px 1px 2px rgba(2, 132, 199, 0.05)",
+      "0px 1px 3px rgba(2, 132, 199, 0.1)",
+      "0px 1px 6px rgba(2, 132, 199, 0.1)", // Reduced spread
+      "0px 2px 12px rgba(2, 132, 199, 0.15)", // Reduced spread
+    ],
+    // Component size overrides for compact design
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            fontSize: "0.75rem", // Smaller button text
+            padding: "4px 12px", // Smaller button padding
+          },
+        },
+      },
+      MuiIconButton: {
+        styleOverrides: {
+          root: {
+            padding: "8px", // Smaller icon buttons
+          },
+        },
+      },
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            "& .MuiInputBase-root": {
+              fontSize: "0.875rem", // Smaller input text
+            },
+          },
+        },
       },
     },
   };
