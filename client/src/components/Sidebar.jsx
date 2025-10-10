@@ -33,6 +33,7 @@ import {
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
+import profileimg from "../assets/profileImg.jpg";
 
 const navItemsList = [
   {
@@ -98,6 +99,7 @@ const Sidebar = ({
   drawerwidth,
   isSidebarOpen,
   setIsSidebarOpen,
+  userInfo,
 }) => {
   const { pathname } = useLocation();
   const [isActive, setIsActive] = useState("");
@@ -119,7 +121,7 @@ const Sidebar = ({
           sx={{
             width: drawerwidth,
             "& .MuiDrawer-paper": {
-              color: theme.palette.secondary[700],
+              color: theme.palette.secondary[500],
               backgroundColor: theme.palette.background.alt,
               boxSizing: "border-box",
               borderWidth: isNonMobile ? 0 : "2px",
@@ -173,12 +175,17 @@ const Sidebar = ({
                       sx={{
                         background:
                           isActive === nameLc
-                            ? theme.palette.primary[600]
+                            ? theme.palette.primary[400]
                             : "tarnsparent",
                         color:
                           isActive === nameLc
-                            ? theme.palette.primary[100]
-                            : theme.palette.secondary[100],
+                            ? theme.palette.primary[700]
+                            : theme.palette.secondary[200],
+                        "&:hover": {
+                          backgroundColor: theme.palette.primary[700],
+                          color: theme.palette.primary[100],
+                          transform: "scale(1.0)",
+                        },
                       }}
                     >
                       <ListItemIcon
@@ -201,23 +208,44 @@ const Sidebar = ({
                 );
               })}
             </List>
-            <Box m={"1.5rem 2rem 2rem 3rem"}>
-              <FlexBetween color={theme.palette.secondary.main}>
-                <Box display={"flex"} alignItems={"center"} gap={"0.5rem"}>
-                  <Typography variant="h6" fontWeight={"bold"}>
-                    Ansar
-                  </Typography>
-                </Box>
-
-                <IconButton
-                  onClick={() => {
-                    setIsSidebarOpen(!isSidebarOpen);
+          </Box>
+          <Box position={"absolute"} bottom={"2rem"}>
+            <Divider />
+            <FlexBetween
+              textTransform={"none"}
+              gap={"1rem"}
+              m={"1.5rem 2rem 0 5rem"}
+            >
+              <Box
+                component={"img"}
+                alt="ProfileImg"
+                src={profileimg}
+                height={"40px"}
+                width={"40"}
+                borderRadius={"50%"}
+                sx={{ objectFit: "cover" }}
+              />
+              <Box textAlign={"left"}>
+                <Typography
+                  fontWeight={"bold"}
+                  fontSize={"0.9rem"}
+                  sx={{
+                    color: theme.palette.secondary[100],
                   }}
                 >
-                  <SettingsOutlined />
-                </IconButton>
-              </FlexBetween>
-            </Box>
+                  {userInfo.name}
+                </Typography>
+                <Typography
+                  fontSize={"0.9rem"}
+                  sx={{
+                    color: theme.palette.secondary[200],
+                  }}
+                >
+                  {userInfo.occupation}
+                </Typography>
+              </Box>
+              <SettingsOutlined />
+            </FlexBetween>
           </Box>
         </Drawer>
       )}

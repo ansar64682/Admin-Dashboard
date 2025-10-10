@@ -9,8 +9,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import AppLayout from "./pages/layout/AppLayout";
 
 function App() {
-  const mode = useSelector((state) => state.global.mode);
-  console.log(mode);
+  const mode = useSelector((state) => state.themeGlobal.mode);
   const theme = useMemo(() => createTheme(themeController(mode)), [mode]);
 
   return (

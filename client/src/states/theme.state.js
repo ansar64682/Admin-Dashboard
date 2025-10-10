@@ -4,8 +4,8 @@ export const initState = {
   mode: "dark",
 };
 
-export const globalSlice = createSlice({
-  name: "global",
+export const themelSlice = createSlice({
+  name: "themeGlobal",
   initialState: initState,
   reducers: {
     setMode: (state) => {
@@ -14,6 +14,6 @@ export const globalSlice = createSlice({
   },
 });
 
-export const { setMode } = globalSlice.actions;
+export const { setMode } = themelSlice.actions;
 
-export default globalSlice.reducer;
+export default themelSlice.reducer;

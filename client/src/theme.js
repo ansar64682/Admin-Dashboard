@@ -1,44 +1,41 @@
-// Color scheme - Fixed with green secondary
 export const colorsDark = {
   grey: {
-    0: "#ffffff", // manually adjusted
-    10: "#f6f6f6", // manually adjusted
-    50: "#f0f0f0", // manually adjusted
-    100: "#e0e0e0",
-    200: "#c2c2c2",
-    300: "#a3a3a3",
-    400: "#858585",
-    500: "#666666",
-    600: "#525252",
-    700: "#3d3d3d",
-    800: "#292929",
-    900: "#141414",
-    1000: "#000000", // manually adjusted
+    0: "#ffffff",
+    10: "#f9fafb",
+    50: "#f3f4f6",
+    100: "#e5e7eb",
+    200: "#d1d5db",
+    300: "#9ca3af",
+    400: "#6b7280",
+    500: "#4b5563",
+    600: "#374151",
+    700: "#1f2937",
+    800: "#18181b",
+    900: "#121212",
+    1000: "#000000",
   },
   primary: {
-    // blue
-    100: "#d3d4de",
-    200: "#a6a9be",
-    300: "#7a7f9d",
-    400: "#4d547d",
-    500: "#21295c",
-    600: "#191F45", // manually adjusted
-    700: "#141937",
-    800: "#0d1025",
-    900: "#070812",
+    100: "#d1d5db",
+    200: "#9ca3af",
+    300: "#6b7280",
+    400: "#4b5563",
+    500: "#27272a",
+    600: "#1f1f23",
+    700: "#18181b",
+    800: "#121212",
+    900: "#0a0a0a",
   },
   secondary: {
-    // yellow
-    50: "#f0f0f0", // manually adjusted
-    100: "#fff6e0",
-    200: "#ffedc2",
-    300: "#ffe3a3",
-    400: "#ffda85",
-    500: "#ffd166",
-    600: "#937a0eff",
-    700: "#997d3d",
-    800: "#665429",
-    900: "#332a14",
+    // Balanced emerald tones (vivid on both themes)
+    100: "#ccfbf1", // light mint
+    200: "#99f6e4", // softer seafoam
+    300: "#5eead4", // visible even on light
+    400: "#2dd4bf", // main accent for dark bg
+    500: "#14b8a6", // teal-emerald hybrid — neutral sweet spot
+    600: "#0d9488", // good contrast on light
+    700: "#0f766e",
+    800: "#115e59",
+    900: "#134e4a",
   },
 };
 
@@ -87,10 +84,6 @@ export const themeController = (mode) => {
               default: colorsDark.primary[600], // #1e293b - Glossy dim dark
               alt: colorsDark.primary[500], // #334155 - Cards
             },
-            text: {
-              primary: colorsDark.grey[600], // #f1f5f9 - Light text
-              secondary: colorsDark.grey[500], // #e2e8f0 - Medium light text
-            },
           }
         : {
             // LIGHT MODE - Clean light
@@ -101,19 +94,16 @@ export const themeController = (mode) => {
             },
             secondary: {
               ...colorsLight.secondary,
-              main: colorsDark.secondary[600], // #22c55e - Main green
+              main: colorsDark.secondary[600],
+              light: colorsDark.secondary[700],
             },
             neutral: {
               ...colorsLight.grey,
-              main: colorsDark.grey[700], // #64748b - Medium grey
+              main: colorsDark.grey[500], // #64748b - Medium grey
             },
             background: {
               default: colorsDark.grey[0], // #ffffff - Pure white
               alt: colorsDark.grey[50], // #f8fafc - Very light grey
-            },
-            text: {
-              primary: colorsDark.grey[900], // #0f172a - Dark text
-              secondary: colorsDark.grey[700], // #334155 - Medium dark text
             },
           }),
     },
