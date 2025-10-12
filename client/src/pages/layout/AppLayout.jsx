@@ -7,7 +7,6 @@ import NavBar from "../../components/NavBar";
 import Sidebar from "../../components/Sidebar";
 import { useSelector } from "react-redux";
 import { useGetUserQuery } from "../../requests/user.requests";
-import { useGetProductQuery } from "../../requests/product.requests";
 
 const AppLayout = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -15,10 +14,6 @@ const AppLayout = () => {
   const userID = useSelector((state) => state.dataGlobal.userId);
 
   const { data } = useGetUserQuery(userID);
-  console.log("🚀 ~ AppLayout ~ data:", data);
-
-  const product = useGetProductQuery();
-  console.log("🚀 ~ AppLayout ~ product:", product);
 
   return (
     <Box
@@ -38,7 +33,7 @@ const AppLayout = () => {
       />
 
       {/* normal app box */}
-      <Box sx={{ flex: 1 }}>
+      <Box sx={{ flex: 1, overflow: "auto" }}>
         <NavBar
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
