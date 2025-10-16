@@ -9,7 +9,6 @@ export const getUser = async (req, res) => {
       console.log("error 404 not found");
     }
 
-    console.log("🚀 ~ getUser ~  user:", user);
     res.status(200).json(user);
   } catch (error) {
     console.log("🚀 ~ getUser ~ error:", error);
