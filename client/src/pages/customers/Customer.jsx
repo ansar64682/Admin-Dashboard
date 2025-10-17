@@ -3,11 +3,11 @@ import { Box, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useGetCustomerQuery } from "../../requests/customer.request";
 import Header from "../../components/Header";
+import Preloader from "../../components/PreLoader";
 
 const Customer = () => {
   const theme = useTheme();
   const { data, isLoading } = useGetCustomerQuery();
-  console.log("🚀 ~ Customer ~ data:", data);
 
   const columns = [
     {
@@ -54,41 +54,46 @@ const Customer = () => {
   return (
     <Box m={"1.5rem 2rem"}>
       <Header title={"Customers"} subtitle={"See Customers Data Below"} />
-      <Box
-        mt={"40px"}
-        height={"75vh"}
-        sx={{
-          "& .MuiDataGrid-root": {
-            border: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            border: "none",
-          },
-          "& .MuiDataGrid-columnHeader": {
-            backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: theme.palette.primary.light,
-          },
-          "& .MuiDataGrid-footerContainer": {
-            backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-toolbarConatiner .MuiButton-text": {
-            color: `${theme.palette.secondary[200]} !important`,
-          },
-        }}
-      >
-        <DataGrid
-          isLoading={isLoading || !data}
-          getRowId={(row) => row._id}
-          rows={data || []}
-          columns={columns}
-        />
-      </Box>
+
+      {data || !isLoading ? (
+        <Box
+          mt={"40px"}
+          height={"75vh"}
+          sx={{
+            "& .MuiDataGrid-root": {
+              border: "none",
+            },
+            "& .MuiDataGrid-cell": {
+              border: "none",
+            },
+            "& .MuiDataGrid-columnHeader": {
+              backgroundColor: theme.palette.background.alt,
+              color: theme.palette.secondary[100],
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-virtualScroller": {
+              backgroundColor: theme.palette.primary.light,
+            },
+            "& .MuiDataGrid-footerContainer": {
+              backgroundColor: theme.palette.background.alt,
+              color: theme.palette.secondary[100],
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-toolbarConatiner .MuiButton-text": {
+              color: `${theme.palette.secondary[200]} !important`,
+            },
+          }}
+        >
+          <DataGrid
+            isLoading={isLoading || !data}
+            getRowId={(row) => row._id}
+            rows={data || []}
+            columns={columns}
+          />
+        </Box>
+      ) : (
+        <Preloader />
+      )}
     </Box>
   );
 };

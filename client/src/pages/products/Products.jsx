@@ -15,6 +15,7 @@ import { useGetProductQuery } from "../../requests/product.requests";
 
 import Header from "../../components/Header";
 import { useState } from "react";
+import Preloader from "../../components/PreLoader";
 
 const Product = ({
   _id,
@@ -91,7 +92,7 @@ const Products = () => {
   const { data, isLoading } = useGetProductQuery();
 
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
-  console.log("🚀 ~ Products ~ isNonMobile:", isNonMobile);
+
   return (
     <Box m="1.5rem 2rem">
       <Header title={"Products"} subtitle={"Products List"} />
@@ -136,7 +137,7 @@ const Products = () => {
           )}
         </Box>
       ) : (
-        <>Loading</>
+        <Preloader />
       )}
     </Box>
   );

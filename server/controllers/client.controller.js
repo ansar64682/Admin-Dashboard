@@ -27,45 +27,37 @@ export const getCustomers = async (req, res) => {
 
 export const getTransactions = async (req, res) => {
   try {
-    const { page = 1, pageSize = 20, sort = null, search = " " } = req.query;
+    const { page = 0, pageSize = 20, sort = null, search = "" } = req.query;
 
-    //sort
+    // Sorting
     const sortResult = () => {
-      if (!sort) {
-        return {};
-      }
+      if (!sort) return {};
       try {
         const sortParsed = JSON.parse(sort);
-        const sortedResult = {
-          [sortParsed.field]: (sortParsed.sort = "asc" ? 1 : -1),
-        };
-        return sortedResult;
+        return { [sortParsed.field]: sortParsed.sort === "asc" ? 1 : -1 };
       } catch (err) {
         return {};
       }
     };
 
-    const sortedResult = Boolean(sort) ? sortResult() : {};
+    const sortedResult = sortResult();
 
-    const transactions = await Transaction.find({
+    // Common filter for both
+    const filter = {
       $or: [{ cost: { $regex: new RegExp(search, "i") } }],
-    })
+    };
+
+    const transactions = await Transaction.find(filter)
       .sort(sortedResult)
       .skip(page * pageSize)
       .limit(pageSize);
 
-    const total = await Transaction.countDocuments({
-      name: { $regex: search, $options: "i" },
-    });
+    const total = await Transaction.countDocuments(filter);
+
     res.status(200).json({ transactions, total });
-    console.log(
-      "🚀 ~ getTransactions ~ transactions, total:",
-      transactions,
-      total
-    );
   } catch (error) {
-    console.log("🚀 ~ getTransactions ~ error:", error.message);
-    res.status(400).json({ error: ", error" });
+    console.error("🚀 ~ getTransactions ~ error:", error.message);
+    res.status(400).json({ error: error.message });
   }
 };
 
