@@ -54,16 +54,39 @@ const Customer = () => {
   return (
     <Box m={"1.5rem 2rem"}>
       <Header title={"Customers"} subtitle={"See Customers Data Below"} />
-      <Box mt={"40px"} height={"75vh"}>
+      <Box
+        mt={"40px"}
+        height={"75vh"}
+        sx={{
+          "& .MuiDataGrid-root": {
+            border: "none",
+          },
+          "& .MuiDataGrid-cell": {
+            border: "none",
+          },
+          "& .MuiDataGrid-columnHeader": {
+            backgroundColor: theme.palette.background.alt,
+            color: theme.palette.secondary[100],
+            borderBottom: "none",
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: theme.palette.primary.light,
+          },
+          "& .MuiDataGrid-footerContainer": {
+            backgroundColor: theme.palette.background.alt,
+            color: theme.palette.secondary[100],
+            borderBottom: "none",
+          },
+          "& .MuiDataGrid-toolbarConatiner .MuiButton-text": {
+            color: `${theme.palette.secondary[200]} !important`,
+          },
+        }}
+      >
         <DataGrid
           isLoading={isLoading || !data}
           getRowId={(row) => row._id}
           rows={data || []}
           columns={columns}
-          sx={{
-            backgroundColor: theme.palette.background.alt,
-            fontSize: "0.8rem",
-          }}
         />
       </Box>
     </Box>

@@ -14,7 +14,14 @@ import salesRoutes from "./routes/sales.routes.js";
 import User from "./models/User.js";
 import Product from "./models/Product.js";
 import ProductStat from "./models/ProductStat.js";
-import { dataUser, dataProduct, dataProductStat } from "./data/index.js";
+import Transaction from "./models/Transaction.js";
+import {
+  dataUser,
+  dataProduct,
+  dataProductStat,
+  dataTransaction,
+} from "./data/index.js";
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -45,4 +52,10 @@ connectDB().then(() => {
   // User.insertMany(dataUser);
   // Product.insertMany(dataProduct);
   // ProductStat.insertMany(dataProductStat);
+  // const data = dataTransaction.map((t) => ({
+  //   ...t,
+  //   userId: new mongoose.Types.ObjectId(t.userId),
+  //   products: t.products.map((id) => new mongoose.Types.ObjectId(id)),
+  // }));
+  // Transaction.insertMany(data);
 });

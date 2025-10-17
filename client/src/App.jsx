@@ -9,6 +9,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import AppLayout from "./pages/layout/AppLayout";
 import Products from "./pages/products/Products";
 import Customer from "./pages/customers/Customer";
+import Transaction from "./pages/transaction/Transaction";
 
 function App() {
   const mode = useSelector((state) => state.themeGlobal.mode);
@@ -28,6 +29,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/products" element={<Products />} />
               <Route path="/customer" element={<Customer />} />
+              <Route path="/transactions" element={<Transaction />} />
             </Route>
           </Routes>
         </ThemeProvider>
