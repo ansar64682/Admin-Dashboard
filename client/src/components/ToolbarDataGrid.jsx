@@ -14,6 +14,7 @@ const ToolbarDataGrid = ({ searchVal, setSearchVal, setSearch }) => {
       <FlexBetween
         sx={{
           justifyContent: "space-between",
+          gap: "40px",
         }}
       >
         <FlexBetween>

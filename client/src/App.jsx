@@ -10,6 +10,8 @@ import AppLayout from "./pages/layout/AppLayout";
 import Products from "./pages/products/Products";
 import Customer from "./pages/customers/Customer";
 import Transaction from "./pages/transaction/Transaction";
+import Geography from "./pages/geography/Geography";
+import Overview from "./pages/overview/Overview";
 
 function App() {
   const mode = useSelector((state) => state.themeGlobal.mode);
@@ -30,6 +32,8 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/customer" element={<Customer />} />
               <Route path="/transactions" element={<Transaction />} />
+              <Route path="/geography" element={<Geography />} />
+              <Route path="/overview" element={<Overview />} />
             </Route>
           </Routes>
         </ThemeProvider>

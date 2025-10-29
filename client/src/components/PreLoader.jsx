@@ -10,8 +10,6 @@ const Preloader = ({ text = "Loading..." }) => {
       justifyContent="center"
       height="100%"
       sx={{
-        background:
-          "linear-gradient(135deg, rgba(240,240,255,0.7), rgba(220,220,255,0.4))",
         backdropFilter: "blur(6px)",
         borderRadius: "1rem",
       }}

@@ -62,11 +62,6 @@ const Transaction = () => {
             },
           }}
         >
-          {/* <ToolbarDataGrid
-          searchVal={searchVal}
-          setSearchVal={setSearchVal}
-          setSearch={setSearch}
-        /> */}
           <DataGrid
             loading={isLoading}
             getRowId={(row) => row._id}
@@ -84,7 +79,7 @@ const Transaction = () => {
             onSortModelChange={(newSortModel) => setSort(newSortModel[0] || {})}
             rowsPerPageOptions={[20, 50, 100]}
             showToolbar
-            slots={{ Toolbar: ToolbarDataGrid }}
+            slots={{ toolbar: ToolbarDataGrid }}
             slotProps={{
               toolbar: { searchVal, setSearchVal, setSearch },
             }}
