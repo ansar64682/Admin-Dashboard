@@ -9,7 +9,7 @@ const Overview = () => {
   return (
     <Box m={"1.5rem 2rem"}>
       <Header title={"OverView"} subtitle={"See Chart for sales Overview"} />
-      <Box height={"75vh"}>
+      <Box height={"75vh"} m={"0.05rem 2rem"}>
         <FormControl sx={{ mt: "3rem", width: "8rem" }}>
           <InputLabel>View</InputLabel>
           <Select
