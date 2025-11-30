@@ -15,6 +15,7 @@ const Daily = () => {
   const [endDate, setEndDate] = useState(new Date("2021-03-01"));
 
   const { data } = useGetSalesQuery();
+  console.log("🚀 ~ Daily ~ data:", data);
 
   const [formattedData] = useMemo(() => {
     if (!data) {
@@ -35,7 +36,7 @@ const Daily = () => {
     };
 
     Object.values(dailyData).forEach(({ date, totalSales, totalUnits }) => {
-      const dateFormated = new Date(data);
+      const dateFormated = new Date(date);
       if (dateFormated >= startDate && dateFormated <= endDate) {
         const splitDate = date.substring(date.indexOf("-") + 1);
 
