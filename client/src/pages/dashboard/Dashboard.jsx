@@ -19,7 +19,6 @@ import {
   Traffic,
   EmailOutlined,
 } from "@mui/icons-material";
-import FlexBetween from "../../components/FlexBetween";
 import StatCard from "../../components/StatCard";
 import OverviewGraph from "../../components/OverviewGraph";
 import PieChart from "../../components/PieChart";
@@ -28,7 +27,6 @@ function Dashboard() {
   const isNonMobile = useMediaQuery("(min-width: 1200px)");
   const theme = useTheme();
   const { data, isLoading } = useGetDashboardQuery();
-  console.log(`🚀 ~ Dashboard ~ data:`, data);
 
   const columns = [
     {

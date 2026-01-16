@@ -9,14 +9,14 @@ import Preloader from "./PreLoader";
 const OverviewGraph = ({ isDashboard = false, view }) => {
   const theme = useTheme();
   const { data, isLoading } = useGetSalesQuery();
-  console.log("🚀 ~ OverviewGraph ~ data:", data);
+  console.log(" OverviewGraph ~ data:", data);
 
   const [totalSalesLine, totalUnitsSoldLine] = useMemo(() => {
     if (!data) {
       return [];
     }
     const { monthlyData } = data?.[0] || {};
-    console.log("🚀 ~ OverviewGraph ~ monthlyData:", monthlyData);
+
     const totalSalesLine = {
       id: "totalSales",
       color: theme.palette.secondary.main,

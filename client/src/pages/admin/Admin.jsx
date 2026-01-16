@@ -8,7 +8,6 @@ import Preloader from "../../components/PreLoader";
 const Admin = () => {
   const theme = useTheme();
   const { data, isLoading } = useGetAdminsQuery();
-  console.log("🚀 ~ Admin ~ data:", data);
 
   const columns = [
     {

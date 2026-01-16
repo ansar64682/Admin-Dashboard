@@ -8,12 +8,9 @@ const PieChart = ({ isDashboard = false }) => {
   const theme = useTheme();
 
   const { data, isLoading } = useGetSalesQuery();
-  console.log("🚀 ~ PieChart ~ data:", data);
 
   const salesByCategory = data?.[0]?.salesByCategory;
-  console.log("🚀 ~ PieChart ~  salesByCategory:", salesByCategory);
   const yearlySalesTotal = data?.[0]?.yearlySalesTotal;
-  console.log("🚀 ~ PieChart ~ yearlySalesTotal:", yearlySalesTotal);
 
   if (!salesByCategory || isLoading) {
     return <Preloader />;

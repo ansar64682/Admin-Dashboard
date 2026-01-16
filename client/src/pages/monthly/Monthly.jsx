@@ -17,7 +17,6 @@ const Monthly = () => {
       return [];
     }
     const { monthlyData } = data?.[0] || {};
-    console.log("🚀 ~ Daily ~ monthlyData:", monthlyData);
 
     const totalSalesLine = {
       id: "totalSales",
@@ -44,7 +43,6 @@ const Monthly = () => {
     const formattedData = [totalSalesLine, totalUnitsSoldLine];
     return [formattedData];
   }, [data]);
-  console.log("🚀 ~ Daily ~ formattedData:", formattedData);
 
   return (
     <Box m={"1.5rem 2.5rem"}>

@@ -15,14 +15,12 @@ const Daily = () => {
   const [endDate, setEndDate] = useState(new Date("2021-03-01"));
 
   const { data } = useGetSalesQuery();
-  console.log("🚀 ~ Daily ~ data:", data);
 
   const [formattedData] = useMemo(() => {
     if (!data) {
       return [];
     }
     const { dailyData } = data?.[0] || {};
-    console.log("🚀 ~ Daily ~ dailyData:", dailyData);
 
     const totalSalesLine = {
       id: "totalSales",
@@ -54,7 +52,6 @@ const Daily = () => {
     const formattedData = [totalSalesLine, totalUnitsSoldLine];
     return [formattedData];
   }, [data, startDate, endDate]);
-  console.log("🚀 ~ Daily ~ formattedData:", formattedData);
 
   return (
     <Box m={"1.5rem 2.5rem"}>
