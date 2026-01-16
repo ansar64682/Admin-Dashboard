@@ -10,6 +10,9 @@ export const api = createApi({
     "Transaction",
     "Geography",
     "Sales",
+    "Admins",
+    "Performance",
+    "Dashboard",
   ],
   endpoints: () => ({}),
 });

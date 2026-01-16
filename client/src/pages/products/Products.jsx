@@ -90,6 +90,8 @@ const Product = ({
 
 const Products = () => {
   const { data, isLoading } = useGetProductQuery();
+  console.log("Request send , Get 200 ....getProducts");
+  console.log("🚀 data recived ~ Products ~  data:", data);
 
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
 

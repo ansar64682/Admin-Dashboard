@@ -1,18 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Box, useTheme } from "@mui/material";
 import Header from "../../components/Header";
 import { ResponsiveLine } from "@nivo/line";
 import Preloader from "../../components/PreLoader";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
 import { useGetSalesQuery } from "../../requests/sales.request";
 
-const Daily = () => {
+const Monthly = () => {
   const theme = useTheme();
-
-  const [startDate, setStartDate] = useState(new Date("2021-02-01"));
-  const [endDate, setEndDate] = useState(new Date("2021-03-01"));
 
   const { data } = useGetSalesQuery();
   console.log("🚀 ~ Daily ~ data:", data);
@@ -21,8 +16,8 @@ const Daily = () => {
     if (!data) {
       return [];
     }
-    const { dailyData } = data?.[0] || {};
-    console.log("🚀 ~ Daily ~ dailyData:", dailyData);
+    const { monthlyData } = data?.[0] || {};
+    console.log("🚀 ~ Daily ~ monthlyData:", monthlyData);
 
     const totalSalesLine = {
       id: "totalSales",
@@ -35,32 +30,27 @@ const Daily = () => {
       data: [],
     };
 
-    Object.values(dailyData).forEach(({ date, totalSales, totalUnits }) => {
-      const dateFormated = new Date(date);
-      if (dateFormated >= startDate && dateFormated <= endDate) {
-        const splitDate = date.substring(date.indexOf("-") + 1);
+    Object.values(monthlyData).forEach(({ month, totalSales, totalUnits }) => {
+      totalSalesLine.data = [
+        ...totalSalesLine.data,
+        { x: month, y: totalSales },
+      ];
 
-        totalSalesLine.data = [
-          ...totalSalesLine.data,
-          { x: splitDate, y: totalSales },
-        ];
-
-        totalUnitsSoldLine.data = [
-          ...totalUnitsSoldLine.data,
-          { x: splitDate, y: totalUnits },
-        ];
-      }
+      totalUnitsSoldLine.data = [
+        ...totalUnitsSoldLine.data,
+        { x: month, y: totalUnits },
+      ];
     });
     const formattedData = [totalSalesLine, totalUnitsSoldLine];
     return [formattedData];
-  }, [data, startDate, endDate]);
+  }, [data]);
   console.log("🚀 ~ Daily ~ formattedData:", formattedData);
 
   return (
     <Box m={"1.5rem 2.5rem"}>
       <Header
-        title={"Daily Data Overview"}
-        subtitle={"See chart for daily data "}
+        title={"Monthly Data Overview"}
+        subtitle={"See chart for Monthly data "}
       />
       <Box
         height={"75vh"}
@@ -68,23 +58,6 @@ const Daily = () => {
           backgroundColor: theme.palette.background.alt,
         }}
       >
-        <Box display={"flex"} justifyContent={"flex-end"}>
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            selectsStart
-            startDate={startDate}
-            endDate={endDate}
-          />
-          <DatePicker
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            selectsEnd
-            startDate={startDate}
-            endDate={endDate}
-            minDate={startDate}
-          />
-        </Box>
         {data ? (
           <ResponsiveLine
             data={formattedData}
@@ -196,4 +169,4 @@ const Daily = () => {
   );
 };
 
-export default Daily;
+export default Monthly;

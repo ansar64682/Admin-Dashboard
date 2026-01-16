@@ -5,6 +5,7 @@ import Transaction from "../models/Transaction.js";
 import getCountryIso3 from "country-iso-2-to-3";
 
 export const getProducts = async (req, res) => {
+  console.log("request recievd..........");
   try {
     const product = await Product.find().populate("stats");
 

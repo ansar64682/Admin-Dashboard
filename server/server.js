@@ -16,12 +16,14 @@ import Product from "./models/Product.js";
 import ProductStat from "./models/ProductStat.js";
 import Transaction from "./models/Transaction.js";
 import OverallStats from "./models/OverallStats.js";
+
 import {
   dataUser,
   dataProduct,
   dataProductStat,
   dataTransaction,
   dataOverallStat,
+  dataAffiliateStat,
 } from "./data/index.js";
 import mongoose from "mongoose";
 
@@ -61,4 +63,5 @@ connectDB().then(() => {
   // }));
   // Transaction.insertMany(data);
   // OverallStats.insertMany(dataOverallStat);
+  // AffiliateSales.insertMany(dataAffiliateStat);
 });
