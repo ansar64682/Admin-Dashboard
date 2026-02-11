@@ -22,7 +22,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { setMode } from "../states/theme.state.js";
-import profileimg from "../assets/profileImg.jpg";
+
 import { useState } from "react";
 
 const NavBar = ({ isSidebarOpen, setIsSidebarOpen, userInfo }) => {
@@ -93,7 +93,6 @@ const NavBar = ({ isSidebarOpen, setIsSidebarOpen, userInfo }) => {
               <Box
                 component={"img"}
                 alt="ProfileImg"
-                src={profileimg}
                 height={"30px"}
                 width={"30"}
                 borderRadius={"50%"}

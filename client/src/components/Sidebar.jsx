@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Box,
   Divider,
@@ -30,68 +31,23 @@ import {
   PieChartOutlined,
 } from "@mui/icons-material";
 
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
-import profileimg from "../assets/profileImg.jpg";
 
 const navItemsList = [
-  {
-    name: "DashBoard",
-    icon: <HomeOutlined />,
-  },
-  {
-    name: "Client",
-    icon: null,
-  },
-  {
-    name: "Products",
-    icon: <ShoppingCartOutlined />,
-  },
-  {
-    name: "Customer",
-    icon: <Groups2Outlined />,
-  },
-  {
-    name: "Transactions",
-    icon: <ReceiptLongOutlined />,
-  },
-  {
-    name: "Geography",
-    icon: <PublicOutlined />,
-  },
-  {
-    name: "Sales",
-    icon: null,
-  },
-  {
-    name: "Overview",
-    icon: <PointOfSaleOutlined />,
-  },
-  {
-    name: "Daily",
-    icon: <TodayOutlined />,
-  },
-  {
-    name: "Monthly",
-    icon: <CalendarMonthOutlined />,
-  },
-  {
-    name: "Breakdown",
-    icon: <PieChartOutlined />,
-  },
-  {
-    name: "Management",
-    icon: null,
-  },
-  {
-    name: "Admin",
-    icon: <AdminPanelSettingsOutlined />,
-  },
-  {
-    name: "Performance",
-    icon: <TrendingUpOutlined />,
-  },
+  { name: "DashBoard", icon: <HomeOutlined /> },
+  { name: "Client", icon: null },
+  { name: "Products", icon: <ShoppingCartOutlined /> },
+  { name: "Customer", icon: <Groups2Outlined /> },
+  { name: "Transactions", icon: <ReceiptLongOutlined /> },
+  { name: "Geography", icon: <PublicOutlined /> },
+  { name: "Sales", icon: null },
+  { name: "Overview", icon: <PointOfSaleOutlined /> },
+  { name: "Daily", icon: <TodayOutlined /> },
+  { name: "Monthly", icon: <CalendarMonthOutlined /> },
+  { name: "Breakdown", icon: <PieChartOutlined /> },
+  { name: "Management", icon: null },
+  { name: "Admin", icon: <AdminPanelSettingsOutlined /> },
+  { name: "Performance", icon: <TrendingUpOutlined /> },
 ];
 
 const Sidebar = ({
@@ -121,6 +77,9 @@ const Sidebar = ({
           sx={{
             width: drawerwidth,
             "& .MuiDrawer-paper": {
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
               color: theme.palette.secondary[500],
               backgroundColor: theme.palette.background.alt,
               boxSizing: "border-box",
@@ -129,41 +88,46 @@ const Sidebar = ({
             },
           }}
         >
-          <Box width={"100%"}>
-            <Box m={"1.5rem 2rem 2rem 2rem"}>
-              <FlexBetween color={theme.palette.secondary.main}>
-                <Box display={"flex"} alignItems={"center"} gap={"0.5rem"}>
-                  <Typography variant="h4" fontWeight={"bold"}>
-                    ECOM Admin
-                  </Typography>
-                </Box>
-                {!isNonMobile && (
-                  <IconButton
-                    onClick={() => {
-                      setIsSidebarOpen(!isSidebarOpen);
-                    }}
-                  >
-                    <ChevronLeft />
-                  </IconButton>
-                )}
-              </FlexBetween>
-            </Box>
+          <Box sx={{ m: "1rem 1.2rem 1.2rem 1.2rem" }}>
+            <FlexBetween color={theme.palette.secondary.main}>
+              <Box display="flex" alignItems="center" gap="0.5rem">
+                <Typography
+                  variant="h4"
+                  fontWeight="bold"
+                  sx={{ fontSize: "1.2rem" }}
+                >
+                  ECOM Admin
+                </Typography>
+              </Box>
+              {!isNonMobile && (
+                <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                  <ChevronLeft />
+                </IconButton>
+              )}
+            </FlexBetween>
+          </Box>
 
+          <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
             <List>
               {navItemsList.map(({ name, icon }) => {
                 if (!icon) {
                   return (
                     <Typography
-                      key={{ name }}
+                      key={name}
                       sx={{
-                        m: "2.25rem 0 1rem 2rem",
+                        m: "1.5rem 0 0.7rem 1.2rem",
+                        fontSize: "0.75rem",
+                        fontWeight: "600",
+                        color: theme.palette.secondary[300],
                       }}
                     >
                       {name}
                     </Typography>
                   );
                 }
+
                 const nameLc = name.toLowerCase();
+                const isActiveItem = isActive === nameLc;
 
                 return (
                   <ListItem key={name} disablePadding>
@@ -173,35 +137,43 @@ const Sidebar = ({
                         setIsActive(nameLc);
                       }}
                       sx={{
-                        background:
-                          isActive === nameLc
-                            ? theme.palette.primary[400]
-                            : "tarnsparent",
-                        color:
-                          isActive === nameLc
-                            ? theme.palette.primary[700]
-                            : theme.palette.secondary[200],
+                        background: isActiveItem
+                          ? theme.palette.primary[400]
+                          : "transparent",
+                        color: isActiveItem
+                          ? theme.palette.primary[700]
+                          : theme.palette.secondary[200],
+                        py: "0.3rem",
                         "&:hover": {
                           backgroundColor: theme.palette.primary[700],
                           color: theme.palette.primary[100],
-                          transform: "scale(1.0)",
                         },
                       }}
                     >
                       <ListItemIcon
                         sx={{
-                          ml: "2rem",
-                          color:
-                            isActive === nameLc
-                              ? theme.palette.primary[600]
-                              : theme.palette.secondary[200],
+                          ml: "1.2rem",
+                          minWidth: "32px",
+                          color: isActiveItem
+                            ? theme.palette.primary[600]
+                            : theme.palette.secondary[200],
                         }}
                       >
-                        {icon}
+                        <Box sx={{ fontSize: "1.2rem", display: "flex" }}>
+                          {icon}
+                        </Box>
                       </ListItemIcon>
-                      <ListItemText primary={name} />
-                      {isActive === nameLc && (
-                        <ChevronRightOutlined sx={{ ml: "auto" }} />
+                      <ListItemText
+                        primary={name}
+                        primaryTypographyProps={{
+                          fontSize: "0.85rem",
+                          fontWeight: "500",
+                        }}
+                      />
+                      {isActiveItem && (
+                        <ChevronRightOutlined
+                          sx={{ ml: "auto", fontSize: "1.2rem" }}
+                        />
                       )}
                     </ListItemButton>
                   </ListItem>
@@ -209,42 +181,34 @@ const Sidebar = ({
               })}
             </List>
           </Box>
-          <Box position={"absolute"} bottom={"2rem"}>
+
+          <Box sx={{ mt: "auto", p: "0.8rem 1.2rem 1.2rem 1.2rem" }}>
             <Divider />
-            <FlexBetween
-              textTransform={"none"}
-              gap={"1rem"}
-              m={"1.5rem 2rem 0 5rem"}
-            >
+            <FlexBetween textTransform="none" gap="0.8rem" sx={{ mt: 1 }}>
               <Box
-                component={"img"}
+                component="img"
                 alt="ProfileImg"
-                src={profileimg}
-                height={"40px"}
-                width={"40"}
-                borderRadius={"50%"}
+                height="28px"
+                width="28px"
+                borderRadius="50%"
                 sx={{ objectFit: "cover" }}
               />
-              <Box textAlign={"left"}>
+              <Box textAlign="left">
                 <Typography
-                  fontWeight={"bold"}
-                  fontSize={"0.9rem"}
-                  sx={{
-                    color: theme.palette.secondary[100],
-                  }}
+                  fontWeight="bold"
+                  fontSize="0.75rem"
+                  sx={{ color: theme.palette.secondary[100] }}
                 >
-                  {userInfo.name}
+                  {userInfo?.name}
                 </Typography>
                 <Typography
-                  fontSize={"0.9rem"}
-                  sx={{
-                    color: theme.palette.secondary[200],
-                  }}
+                  fontSize="0.7rem"
+                  sx={{ color: theme.palette.secondary[200] }}
                 >
-                  {userInfo.occupation}
+                  {userInfo?.occupation}
                 </Typography>
               </Box>
-              <SettingsOutlined />
+              <SettingsOutlined sx={{ fontSize: "1.2rem" }} />{" "}
             </FlexBetween>
           </Box>
         </Drawer>

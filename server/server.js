@@ -10,13 +10,22 @@ import generalRoutes from "./routes/general.routes.js";
 import managementRoutes from "./routes/management.routes.js";
 import salesRoutes from "./routes/sales.routes.js";
 
-// data
+/// data
 import User from "./models/User.js";
 import Product from "./models/Product.js";
 import ProductStat from "./models/ProductStat.js";
 import Transaction from "./models/Transaction.js";
 import OverallStats from "./models/OverallStats.js";
+import AffiliateStats from "./models/AffiliateStats.js";
 
+import {
+  dataUser,
+  dataProduct,
+  dataProductStat,
+  dataTransaction,
+  dataOverallStat,
+  dataAffiliateStat,
+} from "../dummyData/index.js";
 import mongoose from "mongoose";
 
 dotenv.config();
@@ -45,4 +54,15 @@ connectDB().then(() => {
   app.listen(port, () => {
     console.log("Sever Running on PORT : ", port);
   });
+  User.insertMany(dataUser);
+  Product.insertMany(dataProduct);
+  ProductStat.insertMany(dataProductStat);
+  const data = dataTransaction.map((t) => ({
+    ...t,
+    userId: new mongoose.Types.ObjectId(t.userId),
+    products: t.products.map((id) => new mongoose.Types.ObjectId(id)),
+  }));
+  Transaction.insertMany(data);
+  OverallStats.insertMany(dataOverallStat);
+  AffiliateStats.insertMany(dataAffiliateStat);
 });

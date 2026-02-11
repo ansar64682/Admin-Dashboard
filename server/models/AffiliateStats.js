@@ -1,15 +1,12 @@
 import mongoose, { Mongoose, Schema } from "mongoose";
 
-const AffiliateStatsSchema = new ongoose.Schema(
+const AffiliateStatsSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Types.ObjectId,
       ref: "User",
     },
-    affiliateSales: {
-      type: mongoose.Types.ObjectId,
-      ref: "Transactions",
-    },
+    affiliateSales: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );

@@ -27,6 +27,7 @@ function Dashboard() {
   const isNonMobile = useMediaQuery("(min-width: 1200px)");
   const theme = useTheme();
   const { data, isLoading } = useGetDashboardQuery();
+  console.log("🚀 ~ Dashboard ~ data:", data);
 
   const columns = [
     {
